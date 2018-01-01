@@ -1,0 +1,35 @@
+# generate new grid with specified dimensions
+gameofLife = Gameoflife(cells, rows)
+
+# overide specific cell value within grid 
+gameofLife.set_cell(row_index, cell_index, value)
+
+# overide all cell values with specific value within grid
+gameofLife.set_all_values(value)
+
+# print grid array with borders 
+gameofLife.glossyGrid()
+
+# count living neighbours for cell
+gameofLife.count_live_neighbours(cell_index, row_index)
+
+# overide all cell values with random True/False value
+gameofLife.randomise_all_values()
+
+# generate new grid state based on GoL rules
+gameofLife.golnextGrid()
+
+# define next generation grid, replace grid with generated grid
+gameofLife.next_generation()
+
+# check if x value is within grid boundary
+gameofLife.is_valid_x()
+
+# check if y value is within grid boundary
+gameofLife.is_valid_x()
+
+# check if given cell is alive
+gameofLife.is_alive(x, y):
+
+# convert grid to array of living neighbour count
+gameofLife.iterate_living_neighbours():
