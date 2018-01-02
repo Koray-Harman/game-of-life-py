@@ -1,10 +1,10 @@
 import random
 
 ## generate new grid with specified dimensions
-def grid_maker(grid_cells, grid_row):
+def grid_maker(grid_cells, grid_rows):
     grid = []
     cell_value = False
-    for _x in range(grid_row):
+    for _x in range(grid_rows):
         row = []
         for _y in range(grid_cells):
             row.append(cell_value)
@@ -15,8 +15,8 @@ def grid_maker(grid_cells, grid_row):
 class Gameoflife:
 
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        #self.x = x
+        #self.y = y
         self.grid = grid_maker(x, y)
         self.new_grid = []
         self.height = len(self.grid)
