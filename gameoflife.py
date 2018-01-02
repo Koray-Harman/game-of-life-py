@@ -14,39 +14,37 @@ def grid_maker(grid_cells, grid_rows):
 
 class Gameoflife:
 
-    def __init__(self, x, y):
-        #self.x = x
-        #self.y = y
-        self.grid = grid_maker(x, y)
+    def __init__(self, cells_x, rows_y):
+        self.grid = grid_maker(cells_x, rows_y)
         self.new_grid = []
         self.height = len(self.grid)
         self.width = len(self.grid[0])
 
-    # check if x value is within grid boundary
-    def is_valid_x(self, n):
-        return (n >= 0) and (n < self.width)
+    # check if cells_x value is within grid boundary
+    def is_valid_x(self, cells_x):
+        return (cells_x >= 0) and (cells_x < self.width)
 
-    # check if y value is within grid boundary
-    def is_valid_y(self, n):
-        return (n >= 0) and (n < self.height)
+    # check if rows_y value is within grid boundary
+    def is_valid_y(self, rows_y):
+        return (rows_y >= 0) and (rows_y < self.height)
 
     # check if given cell is alive
-    def is_alive(self, x, y):
-        if (self.is_valid_x(x)) and (self.is_valid_y(y)):
-            return self.grid[y][x]
+    def is_alive(self, cells_x, rows_y):
+        if (self.is_valid_x(cells_x)) and (self.is_valid_y(rows_y)):
+            return self.grid[rows_y][cells_x]
         #else:
         #    return False
 
     # count living neighbours for cell
-    def count_live_neighbours(self, x, y):
-        current_y = y - 1
-        end_x = x + 1
-        end_y = y + 1
+    def count_live_neighbours(self, cells_x, rows_y):
+        current_y = rows_y - 1
+        end_x = cells_x + 1
+        end_y = rows_y + 1
         livecount = 0
         while current_y <= end_y:
-            current_x = x - 1
+            current_x = cells_x - 1
             while current_x <= end_x:
-                if not(current_y == y and current_x == x):
+                if not(current_y == rows_y and current_x == cells_x):
                     if self.is_alive(current_x, current_y):
                         livecount += 1
                 current_x += 1
@@ -76,8 +74,8 @@ class Gameoflife:
         print('+', ('-' * width), '+', sep='')
 
     # overide specific cell value within grid
-    def set_cell(self, x, y, value=True):
-        self.grid[y][x] = value
+    def set_cell(self, cells_x, rows_y, value=True):
+        self.grid[rows_y][cells_x] = value
 
     # overide all cell values with specific value within grid
     def set_all_values(self, value=True):
@@ -85,9 +83,9 @@ class Gameoflife:
             row = self.grid[row_index]
             row_length = len(row)
             for cell_index in range(row_length):
-                x = cell_index
-                y = row_index
-                self.set_cell(x, y, value)
+                cells_x = cell_index
+                rows_y = row_index
+                self.set_cell(cells_x, rows_y, value)
 
     # overide all cell values with random True/False value
     def randomise_all_values(self):
@@ -96,41 +94,41 @@ class Gameoflife:
             row_length = len(row)
             for cell_index in range(row_length):
                 value = random.choice([True, False])
-                x = cell_index
-                y = row_index
-                self.set_cell(x, y, value)
+                cells_x = cell_index
+                rows_y = row_index
+                self.set_cell(cells_x, rows_y, value)
 
 #    OLD VERSION OF COUNT count living neighbour cells
-#    def count_alive_neighbours(self, x, y):
+#    def count_alive_neighbours(self, cells_x, rows_y):
 #        livingCells = 0
 #        gridheight = len(self.grid)
-#        gridwidth = len(self.grid[y])
+#        gridwidth = len(self.grid[rows_y])
 #        #neighbours above selected cell
-#        if y - 1 >= 0:
-#            if x - 1 >= 0:
-#                if self.grid[y - 1][x - 1] == True:
+#        if rows_y - 1 >= 0:
+#            if cells_x - 1 >= 0:
+#                if self.grid[rows_y - 1][cells_x - 1] == True:
 #                    livingCells += 1
-#            if self.grid[y - 1][x] == True:
+#            if self.grid[rows_y - 1][cells_x] == True:
 #                livingCells += 1
-#            if x + 1 < gridwidth:
-#                if self.grid[y - 1][x + 1] == True:
+#            if cells_x + 1 < gridwidth:
+#                if self.grid[rows_y - 1][cells_x + 1] == True:
 #                    livingCells += 1
 #        #neighbours either side of selected cell
-#        if x - 1 >= 0:
-#            if self.grid[y][x - 1] == True:
+#        if cells_x - 1 >= 0:
+#            if self.grid[rows_y][cells_x - 1] == True:
 #                    livingCells += 1
-#        if x + 1 < gridwidth:
-#            if self.grid[y][x + 1] == True:
+#        if cells_x + 1 < gridwidth:
+#            if self.grid[rows_y][cells_x + 1] == True:
 #                    livingCells += 1
 #        #neighbours underneath selected cell
-#        if y + 1 < gridheight:
-#            if x - 1 >= 0:
-#                if self.grid[y + 1][x - 1] == True:
+#        if rows_y + 1 < gridheight:
+#            if cells_x - 1 >= 0:
+#                if self.grid[rows_y + 1][cells_x - 1] == True:
 #                    livingCells += 1
-#            if self.grid[y + 1][x] == True:
+#            if self.grid[rows_y + 1][cells_x] == True:
 #                livingCells += 1
-#            if x + 1 < gridwidth:
-#                if self.grid[y + 1][x + 1] == True:
+#            if cells_x + 1 < gridwidth:
+#                if self.grid[rows_y + 1][cells_x + 1] == True:
 #                    livingCells += 1
 #        return(livingCells)
 
@@ -141,9 +139,9 @@ class Gameoflife:
             row = self.grid[row_index]
             next_row = []
             for cell_index in range(len(row)):
-                x = cell_index
-                y = row_index
-                next_row.append(self.count_live_neighbours(x, y))
+                cells_x = cell_index
+                rows_y = row_index
+                next_row.append(self.count_live_neighbours(cells_x, rows_y))
             next_grid.append(next_row)
         print(next_grid)
         return next_grid
@@ -156,10 +154,10 @@ class Gameoflife:
             row = self.grid[row_index]
             next_row = []
             for cell_index in range(len(row)):
-                x = cell_index
-                y = row_index
-                live_neighbour = self.count_live_neighbours(x, y)
-                if self.grid[y][x] is True:
+                cells_x = cell_index
+                rows_y = row_index
+                live_neighbour = self.count_live_neighbours(cells_x, rows_y)
+                if self.grid[rows_y][cells_x] is True:
                     if live_neighbour < 2:
                         next_row.append(False)
                     elif live_neighbour >= 2 and live_neighbour <= 3:
@@ -168,7 +166,7 @@ class Gameoflife:
                         next_row.append(False)
                     else:
                         next_row.append(True)
-                if self.grid[y][x] is False:
+                if self.grid[rows_y][cells_x] is False:
                     if live_neighbour == 3:
                         next_row.append(True)
                     else:
