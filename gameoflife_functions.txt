@@ -1,35 +1,41 @@
-# generate new grid with specified dimensions
-gameofLife = Gameoflife(cells, rows)
+# generate new grid with specified dimensions - calls grid_maker
+TESTGAME = Gameoflife(cells, rows)
+	
+	# generate new grid with specified dimensions
+	grid_maker(width, height)
 
 # overide specific cell value within grid 
-gameofLife.set_cell(row_index, cell_index, value)
+TESTGAME.set_cell(row_index, cell_index, value)
 
 # overide all cell values with specific value within grid
-gameofLife.set_all_values(value)
+TESTGAME.set_all_values(value)
 
 # print grid array with borders 
-gameofLife.glossyGrid()
+TESTGAME.glossy_grid()
 
 # count living neighbours for cell
-gameofLife.count_live_neighbours(cell_index, row_index)
+TESTGAME.count_live_neighbours(cell_index, row_index)
 
 # overide all cell values with random True/False value
-gameofLife.randomise_all_values()
+TESTGAME.randomise_all_values()
 
 # generate new grid state based on GoL rules
-gameofLife.golnextGrid()
+TESTGAME.gol_next_grid()
 
 # define next generation grid, replace grid with generated grid
-gameofLife.next_generation()
+TESTGAME.next_generation()
 
 # check if x value is within grid boundary
-gameofLife.is_valid_x()
+TESTGAME.is_valid_x()
 
 # check if y value is within grid boundary
-gameofLife.is_valid_x()
+TESTGAME.is_valid_y()
 
 # check if given cell is alive
-gameofLife.is_alive(x, y):
+TESTGAME.is_alive(cells_x, rows_y):
 
 # convert grid to array of living neighbour count
-gameofLife.iterate_living_neighbours():
+TESTGAME.iterate_living_neighbours():
+
+#generate next grid and replace default grid - run gol_next_grid and next_generation
+TESTGAME.gol_transition_grid():

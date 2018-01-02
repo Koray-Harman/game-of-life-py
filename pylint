@@ -1,22 +1,5 @@
 E:\Documents\Python Scripts\game-of-life-py>pylint gameoflife.py
 No config file found, using default configuration
-************* Module gameoflife
-C:  1, 0: Missing module docstring (missing-docstring)
-C:  4, 0: Missing function docstring (missing-docstring)
-C: 15, 0: Missing class docstring (missing-docstring)
-C: 24, 4: Missing method docstring (missing-docstring)
-C: 28, 4: Missing method docstring (missing-docstring)
-C: 32, 4: Missing method docstring (missing-docstring)
-C: 39, 4: Missing method docstring (missing-docstring)
-C: 56, 4: Missing method docstring (missing-docstring)
-C: 60, 4: Missing method docstring (missing-docstring)
-C: 77, 4: Missing method docstring (missing-docstring)
-C: 81, 4: Missing method docstring (missing-docstring)
-C: 91, 4: Missing method docstring (missing-docstring)
-C:136, 4: Missing method docstring (missing-docstring)
-C:150, 4: Missing method docstring (missing-docstring)
-C:179, 4: Missing method docstring (missing-docstring)
-C:190, 4: Missing method docstring (missing-docstring)
 
-------------------------------------------------------------------
-Your code has been rated at 8.67/10 (previous run: 7.21/10, +1.45)
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 9.67/10, +0.33)

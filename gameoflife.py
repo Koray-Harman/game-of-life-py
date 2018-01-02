@@ -1,7 +1,8 @@
+"""random required for randomised True/False grid values"""
 import random
 
-## generate new grid with specified dimensions
 def grid_maker(grid_cells, grid_rows):
+    """generate new grid with specified dimensions"""
     grid = []
     cell_value = False
     for _x in range(grid_rows):
@@ -11,8 +12,8 @@ def grid_maker(grid_cells, grid_rows):
         grid.append(row)
     return grid
 
-
 class Gameoflife:
+    """create grid and apply GoL rules"""
 
     def __init__(self, cells_x, rows_y):
         self.grid = grid_maker(cells_x, rows_y)
@@ -20,23 +21,21 @@ class Gameoflife:
         self.height = len(self.grid)
         self.width = len(self.grid[0])
 
-    # check if cells_x value is within grid boundary
     def is_valid_x(self, cells_x):
+        """check if cells_x value is within grid boundary"""
         return (cells_x >= 0) and (cells_x < self.width)
 
-    # check if rows_y value is within grid boundary
     def is_valid_y(self, rows_y):
+        """check if rows_y value is within grid boundary"""
         return (rows_y >= 0) and (rows_y < self.height)
 
-    # check if given cell is alive
     def is_alive(self, cells_x, rows_y):
+        """check if given cell is alive"""
         if (self.is_valid_x(cells_x)) and (self.is_valid_y(rows_y)):
             return self.grid[rows_y][cells_x]
-        #else:
-        #    return False
 
-    # count living neighbours for cell
     def count_live_neighbours(self, cells_x, rows_y):
+        """count living neighbours for cell"""
         current_y = rows_y - 1
         end_x = cells_x + 1
         end_y = rows_y + 1
@@ -51,13 +50,12 @@ class Gameoflife:
             current_y += 1
         return livecount
 
-
-    # define next generation grid
     def next_generation(self):
+        """define next generation grid"""
         self.grid = self.new_grid
 
-    # print grid array with borders
     def glossy_grid(self):
+        """print grid array with borders"""
         width = len(self.grid[0])
         if width == 0:
             print('error')
@@ -73,12 +71,12 @@ class Gameoflife:
             print('|')
         print('+', ('-' * width), '+', sep='')
 
-    # overide specific cell value within grid
     def set_cell(self, cells_x, rows_y, value=True):
+        """overide specific cell value within grid"""
         self.grid[rows_y][cells_x] = value
 
-    # overide all cell values with specific value within grid
     def set_all_values(self, value=True):
+        """overide all cell values with specific value within grid"""
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
             row_length = len(row)
@@ -87,8 +85,8 @@ class Gameoflife:
                 rows_y = row_index
                 self.set_cell(cells_x, rows_y, value)
 
-    # overide all cell values with random True/False value
     def randomise_all_values(self):
+        """overide all cell values with random True/False value"""
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
             row_length = len(row)
@@ -98,42 +96,8 @@ class Gameoflife:
                 rows_y = row_index
                 self.set_cell(cells_x, rows_y, value)
 
-#    OLD VERSION OF COUNT count living neighbour cells
-#    def count_alive_neighbours(self, cells_x, rows_y):
-#        livingCells = 0
-#        gridheight = len(self.grid)
-#        gridwidth = len(self.grid[rows_y])
-#        #neighbours above selected cell
-#        if rows_y - 1 >= 0:
-#            if cells_x - 1 >= 0:
-#                if self.grid[rows_y - 1][cells_x - 1] == True:
-#                    livingCells += 1
-#            if self.grid[rows_y - 1][cells_x] == True:
-#                livingCells += 1
-#            if cells_x + 1 < gridwidth:
-#                if self.grid[rows_y - 1][cells_x + 1] == True:
-#                    livingCells += 1
-#        #neighbours either side of selected cell
-#        if cells_x - 1 >= 0:
-#            if self.grid[rows_y][cells_x - 1] == True:
-#                    livingCells += 1
-#        if cells_x + 1 < gridwidth:
-#            if self.grid[rows_y][cells_x + 1] == True:
-#                    livingCells += 1
-#        #neighbours underneath selected cell
-#        if rows_y + 1 < gridheight:
-#            if cells_x - 1 >= 0:
-#                if self.grid[rows_y + 1][cells_x - 1] == True:
-#                    livingCells += 1
-#            if self.grid[rows_y + 1][cells_x] == True:
-#                livingCells += 1
-#            if cells_x + 1 < gridwidth:
-#                if self.grid[rows_y + 1][cells_x + 1] == True:
-#                    livingCells += 1
-#        return(livingCells)
-
-    # convert grid to array of living neighbour count
     def iterate_living_neighbours(self):
+        """convert grid to array of living neighbour count"""
         next_grid = []
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
@@ -146,10 +110,9 @@ class Gameoflife:
         print(next_grid)
         return next_grid
 
-    # generate new grid state based on GoL rules
     def gol_next_grid(self):
+        """generate new grid state based on GoL rules"""
         next_grid = []
-        #for iteration in range(iterations):
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
             next_row = []
@@ -175,8 +138,8 @@ class Gameoflife:
         self.new_grid = next_grid
         return next_grid
 
-    # iteraite the generation of next grid state
     def new_grid_iterations(self, iterations):
+        """iteraite the generation of next grid state"""
         self.grid = self.gol_next_grid()
         self.glossy_grid()
         for _iteration in range(iterations):
@@ -185,9 +148,8 @@ class Gameoflife:
             final_grid = self.grid
         return final_grid
 
-
-    # generate next grid and replace default grid - runs gol_next_grid() and next_generation()
     def gol_transition_grid(self):
+        """generate next grid and replace default grid - run gol_next_grid and next_generation"""
         self.gol_next_grid()
         self.next_generation()
 
