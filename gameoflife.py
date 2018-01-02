@@ -1,43 +1,43 @@
 import random
 
 ## generate new grid with specified dimensions
-def gridMaker(grid_cells, grid_row):
-    grid = []   
+def grid_maker(grid_cells, grid_row):
+    grid = []
     cell_value = False
-    for x in range(grid_row):
+    for _x in range(grid_row):
         row = []
-        for y in range(grid_cells):
-            row.append(cell_value)    
-        grid.append(row)    
-    return(grid) 
+        for _y in range(grid_cells):
+            row.append(cell_value)
+        grid.append(row)
+    return grid
 
 
 class Gameoflife:
-    
+
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.grid = gridMaker(x, y)
-        self.newGrid = []
+        self.grid = grid_maker(x, y)
+        self.new_grid = []
         self.height = len(self.grid)
         self.width = len(self.grid[0])
-        
-    ## check if x value is within grid boundary
+
+    # check if x value is within grid boundary
     def is_valid_x(self, n):
         return (n >= 0) and (n < self.width)
 
-    ## check if y value is within grid boundary
+    # check if y value is within grid boundary
     def is_valid_y(self, n):
         return (n >= 0) and (n < self.height)
 
-    ## check if given cell is alive
+    # check if given cell is alive
     def is_alive(self, x, y):
         if (self.is_valid_x(x)) and (self.is_valid_y(y)):
             return self.grid[y][x]
-        else:
-            return False
+        #else:
+        #    return False
 
-    ## count living neighbours for cell  
+    # count living neighbours for cell
     def count_live_neighbours(self, x, y):
         current_y = y - 1
         end_x = x + 1
@@ -52,34 +52,34 @@ class Gameoflife:
                 current_x += 1
             current_y += 1
         return livecount
-        
-    
+
+
     # define next generation grid
     def next_generation(self):
-        self.grid = self.newGrid
-    
-    ## print grid array with borders    
-    def glossyGrid(self):
+        self.grid = self.new_grid
+
+    # print grid array with borders
+    def glossy_grid(self):
         width = len(self.grid[0])
         if width == 0:
             print('error')
             return
-        print('+', ('-' * width),'+', sep='')
+        print('+', ('-' * width), '+', sep='')
         for row in self.grid:
             print('|', end="")
             for cell in row:
-                if cell == False:
-                    print('X', end = "")
-                elif cell == True:
-                    print('O', end = "")
+                if cell is False:
+                    print('X', end="")
+                elif cell is True:
+                    print('O', end="")
             print('|')
-        print('+', ('-' * width),'+', sep='')
+        print('+', ('-' * width), '+', sep='')
 
-    ## overide specific cell value within grid     
+    # overide specific cell value within grid
     def set_cell(self, x, y, value=True):
-        self.grid[y][x] = value    
+        self.grid[y][x] = value
 
-    ## overide all cell values with specific value within grid
+    # overide all cell values with specific value within grid
     def set_all_values(self, value=True):
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
@@ -89,7 +89,7 @@ class Gameoflife:
                 y = row_index
                 self.set_cell(x, y, value)
 
-    ## overide all cell values with random True/False value
+    # overide all cell values with random True/False value
     def randomise_all_values(self):
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
@@ -99,8 +99,8 @@ class Gameoflife:
                 x = cell_index
                 y = row_index
                 self.set_cell(x, y, value)
-    
-####### OLD VERSION OF COUNT count living neighbour cells
+
+#    OLD VERSION OF COUNT count living neighbour cells
 #    def count_alive_neighbours(self, x, y):
 #        livingCells = 0
 #        gridheight = len(self.grid)
@@ -131,78 +131,78 @@ class Gameoflife:
 #                livingCells += 1
 #            if x + 1 < gridwidth:
 #                if self.grid[y + 1][x + 1] == True:
-#                    livingCells += 1      
+#                    livingCells += 1
 #        return(livingCells)
-                
-    ## convert grid to array of living neighbour count
+
+    # convert grid to array of living neighbour count
     def iterate_living_neighbours(self):
-        nextGrid = []
+        next_grid = []
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
-            nextRow = []
+            next_row = []
             for cell_index in range(len(row)):
                 x = cell_index
                 y = row_index
-                nextRow.append(self.count_live_neighbours(x, y))
-            nextGrid.append(nextRow)
-        print(nextGrid) 
-        return(nextGrid)
-    
-    ## generate new grid state based on GoL rules
-    def golnextGrid(self):
-        nextGrid = []
+                next_row.append(self.count_live_neighbours(x, y))
+            next_grid.append(next_row)
+        print(next_grid)
+        return next_grid
+
+    # generate new grid state based on GoL rules
+    def gol_next_grid(self):
+        next_grid = []
         #for iteration in range(iterations):
         for row_index in range(len(self.grid)):
             row = self.grid[row_index]
-            nextRow = []
+            next_row = []
             for cell_index in range(len(row)):
                 x = cell_index
                 y = row_index
                 live_neighbour = self.count_live_neighbours(x, y)
-                if self.grid[y][x] == True:
+                if self.grid[y][x] is True:
                     if live_neighbour < 2:
-                        nextRow.append(False)
+                        next_row.append(False)
                     elif live_neighbour >= 2 and live_neighbour <= 3:
-                        nextRow.append(True)
+                        next_row.append(True)
                     elif live_neighbour > 3:
-                        nextRow.append(False)
+                        next_row.append(False)
                     else:
-                        nextRow.append(True)
-                if self.grid[y][x] == False:
+                        next_row.append(True)
+                if self.grid[y][x] is False:
                     if live_neighbour == 3:
-                        nextRow.append(True)
+                        next_row.append(True)
                     else:
-                        nextRow.append(False)
-            nextGrid.append(nextRow)
-        self.newGrid = nextGrid
-        return(nextGrid)
-    
-    ## iteraite the generation of next grid state 
-    def newgridIterations(self, iterations):
-        self.grid = self.golnextGrid()
-        self.glossyGrid()
-        for iteration in range(iterations):
-            self.grid = self.golnextGrid()
-            self.glossyGrid()
-            finalGrid = self.grid
-        return finalGrid
+                        next_row.append(False)
+            next_grid.append(next_row)
+        self.new_grid = next_grid
+        return next_grid
+
+    # iteraite the generation of next grid state
+    def new_grid_iterations(self, iterations):
+        self.grid = self.gol_next_grid()
+        self.glossy_grid()
+        for _iteration in range(iterations):
+            self.grid = self.gol_next_grid()
+            self.glossy_grid()
+            final_grid = self.grid
+        return final_grid
 
 
-    ## generate next grid and replace default grid - runs golnextGrid() and next_generation()
-    def goltransitionGrid(self):
-        self.golnextGrid()
+    # generate next grid and replace default grid - runs gol_next_grid() and next_generation()
+    def gol_transition_grid(self):
+        self.gol_next_grid()
         self.next_generation()
 
 
 
-#gameofLife = Gameoflife(20, 20)
-#gameofLife.set_cell(3, 5, false)
-#gameofLife.set_all_values(True)
-#gameofLife.glossyGrid()
-#gameofLife.count_alive_neighbours(2, 2)
-#gameofLife.glossyGrid()
-#gameofLife.randomise_all_values()
-#gameofLife.glossyGrid()
-#gameofLife.golnextGrid()
-#gameofLife.next_generation()
-#gameofLife.glossyGrid()
+#TESTGAME = Gameoflife(20, 20)
+#TESTGAME.set_cell(3, 5, false)
+#TESTGAME.set_all_values(True)
+#TESTGAME.glossy_grid()
+#TESTGAME.count_alive_neighbours(2, 2)
+#TESTGAME.glossy_grid()
+#TESTGAME.randomise_all_values()
+#TESTGAME.glossy_grid()
+#TESTGAME.gol_next_grid()
+#TESTGAME.next_generation()
+#TESTGAME.glossy_grid()
