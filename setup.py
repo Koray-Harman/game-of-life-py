@@ -14,7 +14,7 @@ with open('LICENSE') as f:
 setup(
     name='gameoflife',
     version='0.1.0',
-    description='Sample package for Python-Guide.org',
+    description='Conways Game of Life - Python Project',
     long_description=readme,
     author='Koray Harman',
     author_email='Koray-Harman@users.noreply.github.com',
