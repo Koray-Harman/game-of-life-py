@@ -1,1 +1,1 @@
-from .gameoflife import *
+from .gameoflife import Gameoflife
