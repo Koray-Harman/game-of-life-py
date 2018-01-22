@@ -8,4 +8,4 @@ This repo is for a practice Conway's Game of Life Python project.
 [![Build Status](https://travis-ci.org/Koray-Harman/game-of-life-py.svg?branch=master)](https://travis-ci.org/Koray-Harman/game-of-life-py)
 ---------------
 
-If you want to learn more about ``Koray-Harman`` repositories, check out [this link](https://github.com/Koray-Harman)_.
+If you want to learn more about ``Koray-Harman`` repositories, check out [this link](https://github.com/Koray-Harman).
