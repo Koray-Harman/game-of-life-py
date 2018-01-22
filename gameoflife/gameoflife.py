@@ -18,8 +18,8 @@ class Gameoflife:
     def __init__(self, cells_x, rows_y):
         self.grid = grid_maker(cells_x, rows_y)
         self.new_grid = []
-        self.height = len(self.grid)
-        self.width = len(self.grid[0])
+        self.height = rows_y
+        self.width = cells_x
 
     def is_valid_x(self, cells_x):
         """check if cells_x value is within grid boundary"""
