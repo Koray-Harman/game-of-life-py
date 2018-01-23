@@ -13,23 +13,33 @@ class BasicTestSuite(unittest.TestCase):
 
     def test_helper_valid_x(self):
         g = gol.Gameoflife(5, 5)
-        assert False
+        self.assertFalse(g.is_valid_x(55))
+        self.assertFalse(g.is_valid_x(5))
+        self.assertFalse(g.is_valid_x(6))
+        self.assertTrue(g.is_valid_x(4))
 
     def test_helper_valid_y(self):
         g = gol.Gameoflife(5, 5)
         self.assertFalse(g.is_valid_y(55))
-        assert False
+        self.assertFalse(g.is_valid_y(5))
+        self.assertFalse(g.is_valid_y(6))
+        self.assertTrue(g.is_valid_y(4))
 
     def test_method_is_alive(self):
         g = gol.Gameoflife(5, 5)
-        assert False
+        g.set_all_values(True)
+        self.assertTrue(g.is_alive(0,0))
+        self.assertTrue(g.is_alive(4,4))
+        self.assertFalse(g.is_alive(5,5))
+        self.assertFalse(g.is_alive(-1,-1))
 
     def test_method_count_live_neighbours(self):
         g = gol.Gameoflife(5, 5)
-        self.assertEqual(gol.count_live_neighbours(1,1), 0)
+        g.set_all_values(True)
+        self.assertEqual(g.count_live_neighbours(0,0), 3)
+        self.assertEqual(g.count_live_neighbours(1,1), 8)
         g.next_generation()
-        self.assertEqual(gol.count_live_neighbours(1,1), 0)
-        assert False
+        
 
 if __name__ == '__main__':
     unittest.main()
