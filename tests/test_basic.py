@@ -36,9 +36,16 @@ class BasicTestSuite(unittest.TestCase):
     def test_method_count_live_neighbours(self):
         g = gol.Gameoflife(5, 5)
         g.set_all_values(True)
-        self.assertEqual(g.count_live_neighbours(0,0), 3)
-        self.assertEqual(g.count_live_neighbours(1,1), 8)
+        self.assertEqual(g.count_live_neighbours(0, 0), 3)
+        self.assertEqual(g.count_live_neighbours(1, 1), 8)
         g.next_generation()
+
+    def test_method_set_cell(self):
+        g = gol.Gameoflife(5, 5)
+        g.set_cell(0, 0, False)
+        self.assertFalse(g.is_alive(0, 0))
+        g.set_cell(0, 0, True)
+        self.assertTrue(g.is_alive(0, 0))
         
 
 if __name__ == '__main__':
